@@ -56,7 +56,7 @@ class BarcodeConverter:
             skipll=int(d1.loc[0,columnsdf[len(columnsdf)-1]])
             filechain=[fel for fel in os.listdir() if fel.lower().endswith(".csv")]
             for el in filechain:
-                with open(el) as fp:
+                with open(el, errors="ignore") as fp:
                     Lines = fp.readlines()
                     Linesf=list()
                     subscol=d1[columnsdf[1]].unique().tolist()
@@ -78,7 +78,7 @@ class BarcodeConverter:
                         elif il>=len(Lines)-skipll:
                             Linesf.append(line)
                         
-                    with open("converted_"+el[:-4]+".CSV", "w") as fw:
+                    with open("converted_"+el[:-4]+".CSV", mode="w", errors="ignore") as fw:
                         fw.writelines(Linesf)
         except:
             self.error_W()
